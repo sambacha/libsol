@@ -2,10 +2,12 @@
 
 > [!IMPORTANT]     
 > This is an abriged library of `solmate` and `solady`, hence Lib*Sol*
->
+>  
 
 
 ## Motivation
+
+Only the useful bits of solmate & solady, abridged and without dependencies.
 
 > [!CRITICAL]    
 > This is a zero-dependency library, additionally we make some minor changes for our use case
