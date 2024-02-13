@@ -48,10 +48,10 @@ via_ir = false
 no_storage_caching = false
 no_rpc_rate_limit = false
 use_literal_content = false
-bytecode_hash = "none"
-cbor_metadata = false
+bytecode_hash = "ipfs"
+cbor_metadata = true
 sparse_mode = false
-build_info = true
+build_info = false
 
 [[profile.default.fs_permissions]]
 access = "read"
@@ -62,18 +62,18 @@ chains = "all"
 endpoints = "all"
 
 [fmt]
-line_length = 120
+line_length = 80
 tab_width = 4
 bracket_spacing = false
 int_types = "long"
-multiline_func_header = "all"
+multiline_func_header = "params_first"
 quote_style = "double"
-number_underscore = "thousands"
+number_underscore = "preserve"
 hex_underscore = "remove"
-single_line_statement_blocks = "preserve"
+single_line_statement_blocks = "multi"
 override_spacing = false
-wrap_comments = true
-ignore = ["libs/*","*.t.sol"]
+wrap_comments = false
+ignore = []
 contract_new_lines = false
 sort_imports = true
 

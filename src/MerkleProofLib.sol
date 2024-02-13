@@ -11,11 +11,11 @@ library MerkleProofLib {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /// @dev Returns whether `leaf` exists in the Merkle tree with `root`, given `proof`.
-    function verify(bytes32[] memory proof, bytes32 root, bytes32 leaf)
-        internal
-        pure
-        returns (bool isValid)
-    {
+    function verify(
+        bytes32[] memory proof,
+        bytes32 root,
+        bytes32 leaf
+    ) internal pure returns (bool isValid) {
         /// @solidity memory-safe-assembly
         assembly {
             if mload(proof) {
@@ -43,11 +43,11 @@ library MerkleProofLib {
     }
 
     /// @dev Returns whether `leaf` exists in the Merkle tree with `root`, given `proof`.
-    function verifyCalldata(bytes32[] calldata proof, bytes32 root, bytes32 leaf)
-        internal
-        pure
-        returns (bool isValid)
-    {
+    function verifyCalldata(
+        bytes32[] calldata proof,
+        bytes32 root,
+        bytes32 leaf
+    ) internal pure returns (bool isValid) {
         /// @solidity memory-safe-assembly
         assembly {
             if proof.length {
@@ -115,7 +115,11 @@ library MerkleProofLib {
                 // For the case where `proof.length + leaves.length == 1`.
                 if iszero(flagsLength) {
                     // `isValid = (proof.length == 1 ? proof[0] : leaves[0]) == root`.
-                    isValid := eq(mload(xor(leaves, mul(xor(proof, leaves), proofLength))), root)
+                    isValid :=
+                        eq(
+                            mload(xor(leaves, mul(xor(proof, leaves), proofLength))),
+                            root
+                        )
                     break
                 }
 
@@ -128,9 +132,9 @@ library MerkleProofLib {
                 // Sometimes, a little memory expansion costs less than branching.
                 // Should cost less, even with a high free memory offset of 0x7d00.
                 leavesLength := shl(5, leavesLength)
-                for { let i := 0 } iszero(eq(i, leavesLength)) { i := add(i, 0x20) } {
-                    mstore(add(hashesFront, i), mload(add(leaves, i)))
-                }
+                for { let i := 0 } iszero(eq(i, leavesLength)) {
+                    i := add(i, 0x20)
+                } { mstore(add(hashesFront, i), mload(add(leaves, i))) }
                 // Compute the back of the hashes.
                 let hashesBack := add(hashesFront, leavesLength)
                 // This is the end of the memory for the queue.
@@ -205,7 +209,8 @@ library MerkleProofLib {
         /// @solidity memory-safe-assembly
         assembly {
             // If the number of flags is correct.
-            for {} eq(add(leaves.length, proof.length), add(flags.length, 1)) {} {
+            for {} eq(add(leaves.length, proof.length), add(flags.length, 1)) {}
+            {
                 // For the case where `proof.length + leaves.length == 1`.
                 if iszero(flags.length) {
                     // `isValid = (proof.length == 1 ? proof[0] : leaves[0]) == root`.
