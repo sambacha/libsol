@@ -9,7 +9,7 @@
 
 Only the useful bits of solmate & solady, abridged and without dependencies.
 
-> [!CRITICAL]    
+> [!WARNING]      
 > This is a zero-dependency library, additionally we make some minor changes for our use case
 
 Eliminate recursive dependencies and reduce the size of importing these libraries.
