@@ -313,6 +313,20 @@ library LibSort {
         reverse(_toUints(a));
     }
 
+
+    /// @dev Reinterpret cast to an int array.
+    function _toInts(uint256[] memory a)
+        private
+        pure
+        returns (int256[] memory casted)
+    {
+        /// @solidity memory-safe-assembly
+        assembly {
+            casted := a
+        }
+    }
+
+    
     /// @dev Returns whether the array is sorted in ascending order.
     function isSorted(uint256[] memory a) internal pure returns (bool result) {
         /// @solidity memory-safe-assembly
@@ -511,18 +525,6 @@ library LibSort {
             // As any address written to memory will have the upper 96 bits
             // of the word zeroized (as per Solidity spec), we can directly
             // compare these addresses as if they are whole uint256 words.
-            casted := a
-        }
-    }
-
-    /// @dev Reinterpret cast to an int array.
-    function _toInts(uint256[] memory a)
-        private
-        pure
-        returns (int256[] memory casted)
-    {
-        /// @solidity memory-safe-assembly
-        assembly {
             casted := a
         }
     }
